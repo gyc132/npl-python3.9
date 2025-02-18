@@ -8,7 +8,7 @@ from scipy.stats import norm
 import copy
 import scipy as sp
 from sklearn.mixture import GaussianMixture
-from sklearn.mixture.gaussian_mixture import _compute_precision_cholesky
+from sklearn.mixture._gaussian_mixture import _compute_precision_cholesky
 import npl.sk_gaussian_mixture as skgm
 
 

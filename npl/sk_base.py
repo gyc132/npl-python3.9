@@ -16,11 +16,10 @@ import numpy as np
 from sklearn import cluster
 from sklearn.base import BaseEstimator
 from sklearn.base import DensityMixin
-from sklearn.externals import six
+import six
 from sklearn.exceptions import ConvergenceWarning
 from sklearn.utils import check_array, check_random_state
-from sklearn.utils.fixes import logsumexp
-
+from scipy.special import logsumexp
 
 def _check_shape(param, param_shape, name):
     """Validate the shape of the input parameter 'param'.
@@ -225,7 +224,7 @@ class BaseMixture(six.with_metaclass(ABCMeta, DensityMixin, BaseEstimator)):
         do_init = not(self.warm_start and hasattr(self, 'converged_'))
         n_init = self.n_init if do_init else 1
 
-        max_lower_bound = -np.infty
+        max_lower_bound = -np.inf
         self.converged_ = False
 
         random_state = check_random_state(self.random_state)
@@ -237,7 +236,7 @@ class BaseMixture(six.with_metaclass(ABCMeta, DensityMixin, BaseEstimator)):
             if do_init:
                 self._initialize_parameters(X, random_state)
 
-            lower_bound = (-np.infty if do_init else self.lower_bound_)
+            lower_bound = (-np.inf if do_init else self.lower_bound_)
 
             for n_iter in range(1, self.max_iter + 1):
                 prev_lower_bound = lower_bound
